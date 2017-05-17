@@ -1,0 +1,13 @@
+*, *::before, *::after {
+	box-sizing: inherit;
+}
+
+$grad: linear-gradient(to bottom, green, blue);
+
+.slides {
+	div {
+		background: $grad;
+		width: 20vmax;
+		height: 20vmax;
+	}
+}
