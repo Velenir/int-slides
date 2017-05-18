@@ -15,10 +15,6 @@ body {
 	min-height: 100%;
 }
 
-div, span {
-	outline: 1px dotted black;
-}
-
 .wrapper {
 	overflow: hidden;
 	position: relative;
@@ -127,10 +123,6 @@ $arrow-transform: translateY(-50%);
 			display: inline-block;
 			position: absolute;
 			top: -9px;
-
-			/* left: calc(var(--offset) * 102.7% / 21); */
-			/* transform: translateX(-31%); */
-			
 			left: -14px;
 			transform: translateX(calc(var(--offset) * 100%));
 			transition: transform .3s;

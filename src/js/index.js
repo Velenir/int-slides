@@ -2,11 +2,11 @@ const slide1 = document.querySelector(".slide--1");
 const range = slide1.querySelector(".range");
 const input = range.querySelector(".range__input");
 
+// move red roller together with input range
 input.addEventListener("change", function() {
-	console.log(this.value);
 	range.style.setProperty("--offset", this.value - 1);
 });
-
+// --------------------------
 
 const pill = slide1.querySelector(".pill");
 const pillStyle = pill.style;
@@ -14,6 +14,7 @@ let {left: pillStartLeft, top: pillStartTop} = getComputedStyle(pill);
 pillStartLeft = parseInt(pillStartLeft);
 pillStartTop = parseInt(pillStartTop);
 
+// move pill's position to its style for easier tacking, changing later
 pillStyle.left = pillStartLeft + "px";
 pillStyle.top = pillStartTop + "px";
 
@@ -24,19 +25,19 @@ pill.addEventListener("touchmove", touchMove);
 pill.addEventListener("touchend", touchEnd);
 
 
+// keep track of pillPosition
 const pillTracking = {};
 
-
+// calculate delta for every touch move
 function touchStart(e) {
 	pillTracking.startX = parseInt(pillStyle.left);
 	pillTracking.startY = parseInt(pillStyle.top);
-	console.log("TOUCHSTART");
+	
 	const pillTouch = e.changedTouches[0];
 	pillTracking.x = pillTouch.clientX;
 	pillTracking.y = pillTouch.clientY;
 }
 function touchMove(e) {
-	console.log("TOUCHMOVE");
 	const pillTouch = e.changedTouches[0];
 	
 	const dx = Math.floor(pillTracking.x - pillTouch.clientX);
@@ -47,12 +48,10 @@ function touchMove(e) {
 	pillStyle.top = pillTracking.startY - dy + "px";
 }
 function touchEnd() {
-	console.log("TOUCHEND");
-
 	const {left: x, top: y} = pill.getBoundingClientRect();
 	const underTouch = document.elementFromPoint(x, y);
 	
-	console.log(underTouch);
+	// change gramps image if dropped on him
 	healGramps(underTouch);
 }
 
@@ -67,10 +66,11 @@ function healGramps(el) {
 	}
 }
 
-
+// -----------------------
 const arrows = document.querySelectorAll(".nav");
 const slides = document.querySelector(".slides");
 
+// slide in out on click
 arrows[0].addEventListener("click", (e) => {
 	e.preventDefault();
 	slides.classList.remove("slides--locked");
@@ -78,11 +78,12 @@ arrows[0].addEventListener("click", (e) => {
 
 arrows[1].addEventListener("click", (e) => {
 	e.preventDefault();
+	// when changin to slide 2, lock data
 	lockData();
 	slides.classList.add("slides--locked");
 });
 
-
+// ------------------------------
 const checks = slide1.querySelectorAll(".check-button__checkbox");
 
 const slide2 = document.querySelector(".slide--2");
@@ -93,14 +94,19 @@ const gramps2 = slide2.querySelector(".gramps");
 const checks2 = slide2.querySelectorAll(".check-button__checkbox");
 
 function lockData() {
+	// copy rollers' position
 	range2.style.setProperty("--offset", input.value - 1);
 	input2.value = input.value;
 	
+	// copy pill style
 	Object.assign(pill2.style, pill.style);
+	// hide to avoid transition playing
 	pill2.classList.toggle("hidden", pill.classList.contains("pill--out"));
 	
+	// give gramps same state (happy|sad)
 	gramps2.className = gramps.className;
 	
+	// copy checked states
 	for(let i = 0, len = checks.length; i < len; ++i) {
 		checks2[i].checked = checks[i].checked;
 	}
