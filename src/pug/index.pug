@@ -3,41 +3,44 @@ extends layout.pug
 block content
 	include mixins.pug
 	
-
-	.slides
-		+background
-		.contents
-			.title
-				p.title__main Розулип
-					sup.title__main__r ®
-				p.title__sub
-					| Легко на сердце от чистых сосудов
-			
-			.gramps
-				+gramps--sad.gramps--sad
-				+gramps--happy.gramps--happy
-			+pill
-			
-			a.nav.nav--prev(href="#")
-				+arrow
-			a.nav.nav--next(href="#")
-				+arrow
-			
-			.range
-				.range__wrapper
-					+figures
-				input.range__input(type="range", value=1, min=1, max=21, step=1)
-			
-			.time
-				+check-button
-					+day-button
-					+day-button--active
-				+check-button
-					+week-button
-					+week-button--active
-				+check-button
-					+month-button
-					+month-button--active
-			
-			
+	mixin slide(cl,disabled)
+		.slide(class=cl)
+			+background
+			.contents
+				.title
+					p.title__main Розулип
+						sup.title__main__r ®
+					p.title__sub
+						| Легко на сердце от чистых сосудов
+				
+				.gramps
+					+gramps--sad.gramps--sad
+					+gramps--happy.gramps--happy
+				+pill
+				
+				.range
+					.range__wrapper
+						+figures
+					input.range__input(type="range", value=1, min=1, max=21, step=1, disabled=disabled)
+				
+				.time
+					+check-button(disabled=disabled)
+						+day-button
+						+day-button--active
+					+check-button(disabled=disabled)
+						+week-button
+						+week-button--active
+					+check-button(disabled=disabled)
+						+month-button
+						+month-button--active
+	
+	
+	.wrapper
+		a.nav.nav--prev(href="#")
+			+arrow
+		a.nav.nav--next(href="#")
+			+arrow
+		.slides
+			+slide("slide--1")
+			+slide("slide--2", true)
 		

@@ -19,7 +19,24 @@ div, span {
 	outline: 1px dotted black;
 }
 
+.wrapper {
+	overflow: hidden;
+	position: relative;
+}
+
 .slides {
+	position: relative;
+	width: 1280px;
+	height: 752px;
+	display: flex;
+	transition: transform 1s;
+
+	&--locked {
+		transform: translateX(-100%);
+	}
+}
+
+.slide {
 	position: relative;
 }
 
@@ -75,6 +92,7 @@ $arrow-transform: translateY(-50%);
 	position: absolute;
 	top: 50%;
 	transform: $arrow-transform;
+	z-index: 999;
 
 	&--prev {
 		left: 1%;
@@ -193,4 +211,8 @@ $arrow-transform: translateY(-50%);
 		font-size: 14px;
 		letter-spacing: -.7px;
 	}
+}
+
+.hidden {
+	display: none;
 }

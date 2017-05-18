@@ -1,4 +1,5 @@
-const range = document.querySelector(".range");
+const slide1 = document.querySelector(".slide--1");
+const range = slide1.querySelector(".range");
 const input = range.querySelector(".range__input");
 
 input.addEventListener("change", function() {
@@ -7,7 +8,7 @@ input.addEventListener("change", function() {
 });
 
 
-const pill = document.querySelector(".pill");
+const pill = slide1.querySelector(".pill");
 const pillStyle = pill.style;
 let {left: pillStartLeft, top: pillStartTop} = getComputedStyle(pill);
 pillStartLeft = parseInt(pillStartLeft);
@@ -17,16 +18,13 @@ pillStyle.left = pillStartLeft + "px";
 pillStyle.top = pillStartTop + "px";
 
 pill.addEventListener("touchstart", touchStart);
-pill.addEventListener("mousedown", touchStart);
 
 pill.addEventListener("touchmove", touchMove);
-pill.addEventListener("mousemove", touchMove);
 
 pill.addEventListener("touchend", touchEnd);
-pill.addEventListener("mouseup", touchEnd);
 
 
-let pillTracking = {};
+const pillTracking = {};
 
 
 function touchStart(e) {
@@ -59,12 +57,51 @@ function touchEnd() {
 }
 
 
-const gramps = document.querySelector(".gramps");
+const gramps = slide1.querySelector(".gramps");
 const grampsSad = gramps.querySelector(".gramps--sad");
 
 function healGramps(el) {
 	if(el === grampsSad) {
 		gramps.classList.add("gramps--healed");
 		pill.classList.add("pill--out");
+	}
+}
+
+
+const arrows = document.querySelectorAll(".nav");
+const slides = document.querySelector(".slides");
+
+arrows[0].addEventListener("click", (e) => {
+	e.preventDefault();
+	slides.classList.remove("slides--locked");
+});
+
+arrows[1].addEventListener("click", (e) => {
+	e.preventDefault();
+	lockData();
+	slides.classList.add("slides--locked");
+});
+
+
+const checks = slide1.querySelectorAll(".check-button__checkbox");
+
+const slide2 = document.querySelector(".slide--2");
+const range2 = slide2.querySelector(".range");
+const input2 = range2.querySelector(".range__input");
+const pill2 = slide2.querySelector(".pill");
+const gramps2 = slide2.querySelector(".gramps");
+const checks2 = slide2.querySelectorAll(".check-button__checkbox");
+
+function lockData() {
+	range2.style.setProperty("--offset", input.value - 1);
+	input2.value = input.value;
+	
+	Object.assign(pill2.style, pill.style);
+	pill2.classList.toggle("hidden", pill.classList.contains("pill--out"));
+	
+	gramps2.className = gramps.className;
+	
+	for(let i = 0, len = checks.length; i < len; ++i) {
+		checks2[i].checked = checks[i].checked;
 	}
 }
