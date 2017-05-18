@@ -18,7 +18,8 @@ import pug from 'gulp-pug';
 
 const src = {
 	styles: 'src/styles/*.css',
-	views: 'src/pug/index.pug',
+	views: 'src/pug/*.pug',
+	mainView: 'src/pug/index.pug',
 	scripts: 'src/js/*.js',
 	images: 'src/images/*'
 };
@@ -81,7 +82,7 @@ export const scriptsPub = () => {
 
 export const views = () => {
 	const locals = {title: 'Slides'};
-	return gulp.src(src.views)
+	return gulp.src(src.mainView)
 	.pipe(pug({locals}))
 	.pipe(gulp.dest(dest.base))
 	.pipe(stream({once: true}));
@@ -107,7 +108,8 @@ export const watch = () => {
 	gulp.watch(src.images, reload);
 };
 
-export const build = gulp.series(clean, gulp.parallel(styles, scriptsPub, views));
-export const serve = gulp.series(clean, gulp.parallel(styles, scripts, views), sync);
+const always = gulp.parallel(styles, views, images);
+export const build = gulp.series(clean, gulp.parallel(scriptsPub, always));
+export const serve = gulp.series(clean, gulp.parallel(scripts, always), sync);
 
 export default serve;

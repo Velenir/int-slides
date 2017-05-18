@@ -1,0 +1,43 @@
+mixin background
+	img.background(src="/images/back.png")&attributes(attributes)
+	
+mixin gramps--happy
+	img.gramps.gramps--happy(src="/images/happy.png")&attributes(attributes)
+	
+mixin gramps--sad
+	img.gramps.gramps--sad(src="/images/sad.png")&attributes(attributes)
+	
+mixin arrow
+	img.arrow(src="/images/arrow.png")&attributes(attributes)
+	
+mixin month-button
+	img.button.month-button(src="/images/mounth-button.png")&attributes(attributes)
+	
+mixin month-button--active
+	img.button.button--active.month-button(src="/images/mounth-pushed-button.png")&attributes(attributes)
+		
+mixin week-button
+	img.button.week-button(src="/images/week-button.png")&attributes(attributes)
+	
+mixin week-button--active
+	img.button.button--active.week-button(src="/images/week-pushed-button.png")&attributes(attributes)
+		
+mixin day-button
+	img.button.day-button(src="/images/day-button.png")&attributes(attributes)
+	
+mixin day-button--active
+	img.button.button--active.day-button(src="/images/day-pushed-button.png")&attributes(attributes)
+	
+mixin figures
+	img.figures(src="/images/figures.png")&attributes(attributes)
+	
+mixin pill
+	img.pill(src="/images/780px-Pill.svg[1].png")&attributes(attributes)
+	
+
+
+mixin check-button(id)
+	label.check-button
+		input.check-button__checkbox(type="checkbox", id=id)
+		if block
+			block
