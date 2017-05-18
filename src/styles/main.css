@@ -40,6 +40,20 @@ div, span {
 	left: 50%;
 	top: 5%;
 	transform: translateX(-50%);
+
+	&--happy {
+		display: none;
+	}
+
+	&--healed {
+		.gramps--sad {
+			display: none;
+		}
+
+		.gramps--happy {
+			display: initial;
+		}
+	}
 }
 
 .pill {
@@ -47,7 +61,12 @@ div, span {
 	top: 40%;
 	left: 10%;
 	width: 100px;
-	transform: rotate(45deg);
+	transform: scale(1) rotate(45deg);
+
+	&--out {
+		transform: scale(0,0) rotate(2turn);
+		transition: transform 1s;
+	}
 }
 
 $arrow-transform: translateY(-50%);
