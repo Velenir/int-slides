@@ -74,12 +74,8 @@ $arrow-transform: translateY(-50%);
 	text-align: center;
 
 	--offset: 0;
-}
 
-.figures {
-	position: relative;
-
-	&-wrapper {
+	&__wrapper {
 		display: inline-block;
 		margin: 0 auto;
 		margin-bottom: 1.5%;
@@ -104,8 +100,8 @@ $arrow-transform: translateY(-50%);
 		}
 	}
 
-	&-input {
-		width: 79.5%;
+	&__input {
+		width: 79%;
 		margin: 0 auto -2.5%;
 		display: block;
 		appearance: none;
@@ -120,6 +116,10 @@ $arrow-transform: translateY(-50%);
 			background-position: 4px 50%;
 		}
 	}
+}
+
+.figures {
+	position: relative;
 }
 
 .time {
